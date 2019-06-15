@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <title>购物商城</title>
+    <title>商品管理</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -46,21 +46,31 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-    <div class="row" th:each="emp:${product}">
-        <div class="col-sm-6 col-md-4">
-            <div class="thumbnail">
-                <img th:src="${emp.uri}" th:alt="${emp.name}">
-                <div class="caption">
-                    <h3 th:text="${emp.name}"></h3>
-                    <p>
-                        <a href="#" class="btn btn-primary" role="button">购买</a>
-                        <a href="#" class="btn btn-default" role="button">加入购物车</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
+<form name="input" action="/submit" method="get">
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">商品名称</span>
+    <input type="text" name="name" class="form-control" placeholder="Product name" aria-describedby="basic-addon1">
+</div>
 
-    <img alt="五年高考三年模拟" src="https://g-search1.alicdn.com/img/bao/uploaded/i4/imgextra/i1/112060494/O1CN01tC6ANO1FWI9TXWH20_!!0-saturn_solar.jpg_250x250.jpg_.webp">
-</body>
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon2">商品图片地址</span>
+    <input type="text" name="image_uri" class="form-control" placeholder="Image Address" aria-describedby="basic-addon2">
+</div>
+
+<div class="input-group">
+    <span class="input-group-addon">价格</span>
+    <input type="text" name="price" class="form-control" aria-label="Amount (to the nearest dollar)">
+</div>
+
+<label for="profile">商品描述</label>
+    <div class="input-group">
+    <input type="text" name="profile" class="form-control" id="profile" aria-describedby="basic-addon3">
+    </div>
+    <div class="btn-group">
+    <button type="submit" class="btn btn-default" >提交</button>
+    </div>
+</form>
+
+
 </body>
 </html>
