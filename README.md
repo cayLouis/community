@@ -1,8 +1,14 @@
 ## 购物系统
 
 ## 资料
-https://spring.io/guides
-https://spring.io/guides/gs/serving-web-content/
+
+[Spring Boot 帮助文档](https://spring.io/guides)
+
+[Spring Boot响应式页面](https://spring.io/guides/gs/serving-web-content/)
+
+[GitHub授权帮助](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/)
 
 ## 工具
-https://git-scm.com/download/win
+[git管理](https://git-scm.com/download/win)
+
+https://square.github.io/okhttp/
