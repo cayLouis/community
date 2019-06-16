@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
-      xmlns:text="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
 <head>
     <title>购物商城</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -9,16 +8,6 @@
     <script src="js/bootstrap.min.js" type="javascript"></script>
 </head>
 <body>
-<script>
-    function buyProduct() {
-        document.start.action="/buying";
-        document.start.submit();
-    }
-    function addIncart() {
-        document.start.action="/addincart";
-        document.start.submit();
-    }
-</script>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -42,8 +31,8 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li  th:if="${session.user!=null}">
-                    <form action="/cart" method="get" >
-                    <button class="btn btn-primary" type="submit" name="user_id" th:value="${session.user.id}" >购物车</button>
+                    <form action="/cart" method="get" type="form">
+                        <button class="btn btn-primary" type="submit" name="user_id" th:value="${session.user.id}" >购物车</button>
                     </form>
                 </li>
                 <li class="dropdown" th:if="${session.user!=null}">
@@ -65,24 +54,28 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<form name="start" role="form" action="" method="get">
-    <div class="row" th:each="emp:${product}">
-<!--        <div class="col-sm-6 col-md-4">-->
-            <div class="thumbnail">
-                <img th:src="${emp.uri}" th:alt="${emp.name}">
-                <div class="caption">
-                    <h3 th:text="${emp.name}" align="center"></h3>
-                    <p class="navbar-text" th:text="${emp.profile}"></p>
-                    <span class="label label-success">价格</span>
-                    <span  th:text="${emp.price}" class="label label-info"></span>
-                    <button class="btn btn-primary"  name="pro_id" th:value="${emp.getPro_id()}" role="button"  onclick="buyProduct()">购买</button>
-                    <button class="btn btn-primary"  name="pro_id" th:value="${emp.getPro_id()}" role="button"  onclick="addIncart()">加入购物车</button>
-                </div>
-                </div>
-            </div>
-<!--        </div>-->
-<!--    </div>-->
+<form name="input" action="/moveoutcart" method="get" th:if="${session.user!=null}">
+<ul class="media-list" th:each="every:${products}" th:if="${session.user!=null}">
+    <li class="media">
+        <div class="media-left">
+            <a >
+                <img class="media-object" th:src="${every.uri}" alt="...">
+            </a>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading" th:text="${every.name}"></h4>
+            <span class="label label-info" th:text="${every.price}"></span>
+            <p th:text="${every.profile}"></p>
+            <button type="submit" name="pro_id" th:value="${every.pro_id}" >删除</button>
+        </div>
+    </li>
+</ul>
 </form>
-</body>
+<span class="label label-success" th:if="${session.user!=null}">总价</span>
+<p th:text="${total_price}" th:if="${session.user!=null}"></p>
+<p th:if="${session.user!=null}">
+    <a class="btn btn-primary btn-lg" href="#" role="button">付款</a>
+    <a class="btn btn-primary btn-lg" href="/" role="button">返回</a>
+</p>
 </body>
 </html>

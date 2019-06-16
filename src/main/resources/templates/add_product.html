@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>管理商品</title>
+    <title>增加商品</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -23,12 +23,7 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form class="navbar-form navbar-left">
-                <div class="form-group" >
-                    <input type="text" class="form-control" placeholder="搜索商品">
-                </div>
-                <button type="submit" class="btn btn-default">提交</button>
-            </form>
+            <a class="navbar-brand" href="/manage_product">返回</a>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown" th:if="${session.user!=null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.user.getName()}"><span class="caret"></span></a>
@@ -41,29 +36,36 @@
                 <li th:if="${session.user==null}">
                     <a href="/register">登录</a>
                 </li>
-                <li th:if="${session.user==null}">
-                    <a href="/register">注册</a>
-                </li>
 
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
-<form name="input" action="/delete_product" method="get" th:if="${session.user!=null}">
-<div class="media" th:each="emp:${product}" th:if="${session.user.getName()=='louis'}">
-    <div class="media-left">
-        <a href="#">
-            <img class="media-object" th:src="${emp.uri}" alt="...">
-        </a>
-    </div>
-    <div class="media-body">
-        <h4 class="media-heading" th:text="${emp.name}"></h4>
-        <button type="submit" name="pro_id" th:value="${emp.pro_id}">点击删除</button>
-    </div>
+<form name="input" action="/submit" method="get" th:if="${session.user.getName()=='louis'}">
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">商品名称</span>
+    <input type="text" name="name" class="form-control" placeholder="Product name" aria-describedby="basic-addon1">
 </div>
+
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon2">商品图片</span>
+    <input type="text" name="image_uri" class="form-control" placeholder="Image Address" aria-describedby="basic-addon2">
+</div>
+
+<div class="input-group">
+    <span class="input-group-addon">商品价格</span>
+    <input type="text" name="price" class="form-control" aria-label="Amount (to the nearest dollar)">
+</div>
+
+<label for="profile">商品描述</label>
+    <div class="input-group">
+    <input type="text" name="profile" class="form-control" id="profile" aria-describedby="basic-addon3">
+    </div>
+    <div class="btn-group">
+    <button type="submit" class="btn btn-default" >提交</button>
+    </div>
 </form>
 <div class="alert alert-warning" role="alert" th:if="${session.user.getName()!='louis'}">请先获得管理员权限！！</div>
-
 
 </body>
 </html>

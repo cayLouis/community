@@ -3,7 +3,7 @@ package com.luocan.springboot01helloworldquick.model;
 public class User {
     private Integer id;
     private String name;
-    private String Account;
+    private String password;
     private String Token;
     private Long gmtCreate;
     private Long gmtModified;
@@ -24,12 +24,12 @@ public class User {
         this.name = name;
     }
 
-    public String getAccount() {
-        return Account;
+    public String getPassword() {
+        return password;
     }
 
-    public void setAccount(String account) {
-        Account = account;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getToken() {
